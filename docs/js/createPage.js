@@ -46,7 +46,7 @@ const createPage = () => {
             .attr('class','col')
           .append('a')
             .attr('role','button')
-            .attr('class','btn btn-outline-primary')
+            .attr('class','btn btn-outline-secondary')
             .attr('href',d.github_link)
             .attr('target','_blank')
             .html(function(){
@@ -80,7 +80,7 @@ const createPage = () => {
             .attr('class','col')
           .append('a')
             .attr('role','button')
-            .attr('class','btn btn-outline-primary')
+            .attr('class','btn btn-outline-secondary')
             .attr('href',d.prototype_link)
             .attr('target','_blank')
             .html(function(){
@@ -99,7 +99,7 @@ const createPage = () => {
             .attr('class','col')
           .append('a')
             .attr('role','button')
-            .attr('class','btn btn-outline-primary')
+            .attr('class','btn btn-outline-secondary')
             .attr('href',d.additional_link)
             .attr('target','_blank')
             .html(function(){
@@ -120,7 +120,7 @@ const createPage = () => {
             .attr('class','col')
           .append('a')
             .attr('role','button')
-            .attr('class','btn btn-outline-primary')
+            .attr('class','btn btn-outline-secondary')
             .attr('href',d.video_link)
             .attr('target','_blank')
             .html(function(){
