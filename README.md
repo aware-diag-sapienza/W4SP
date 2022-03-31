@@ -1,2 +1,2 @@
 # W4SP
-Versatile Visual Analysis for Steerable Partial Dependence
+Versatile Visual analysis for Steerable Partial dependence
