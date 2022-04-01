@@ -1,0 +1,20 @@
+.radBtn {
+    padding: 0.5rem;
+}
+
+.comp_checkboxes {
+    display: flex;
+    flex-direction: column;
+    .field {
+        margin-bottom: 0.75rem;
+        label {
+            width: 100%;
+            .control_label {
+                margin-left: 0.5rem;
+            }
+            .tag_label {
+                margin-left: auto;
+            }
+        }
+    }
+}

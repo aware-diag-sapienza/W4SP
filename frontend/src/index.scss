@@ -1,0 +1,115 @@
+@charset "utf-8";
+@import "../node_modules/bulma-checkbox/bulma-checkbox.scss";
+@import "../node_modules/bulma/bulma.sass";
+
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 6pt;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  margin: 0;
+  background: white;
+}
+
+#nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: #F1F3F4;
+  border-bottom: solid 1px lightgray;
+  line-height: 30px;
+  display: flex;
+  column-gap: 20px;
+  
+  .logo {
+    color: #5F6367;
+    padding-left: 10px;
+    font-weight: 500;
+    font-size: 2em;
+  }
+}
+
+
+#main {
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 5px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: 550px 1fr 50px 50px /* 50px */;
+  row-gap: 10px;
+  column-gap: 10px;
+  grid-template-areas: 
+  "FeaturesControls FeaturesView"
+  "dataset FeaturesView"
+  "legend-Risk FeaturesView"
+  "legend-AbsInfluence FeaturesView"
+  /* "legend-RelInfluence FeaturesView" */;
+  justify-items: stretch;
+
+  > * {
+    width: 100%;
+    height: 100%;
+  }
+
+  .legend {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows:  10px 1fr;
+    grid-template-areas: 
+      "title"
+      "svg";
+    
+    .title {
+      grid-area: title;
+      width: 100%;
+      height: 100%;
+      font-size: 1.4em;
+      line-height: 10px;
+      font-weight: 600;
+    }
+
+    svg {
+      grid-area: svg;
+      width: 100%;
+      height: 100%;
+      
+      .xAxis {
+        font-size: 7px;
+        .domain {
+          display: none;
+        }
+      }
+    }
+  }
+
+  #legend-RelInfluence {
+    grid-area: legend-RelInfluence;
+    width: 100%;
+    height: 100%;
+  }
+
+  #legend-AbsInfluence {
+    grid-area: legend-AbsInfluence;
+    width: 100%;
+    height: 100%;
+  }
+
+  #legend-Risk {
+    grid-area: legend-Risk;
+    width: 100%;
+    height: 100%;
+  }
+}
+

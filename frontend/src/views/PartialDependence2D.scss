@@ -1,0 +1,41 @@
+#PartialDependence2D {
+  grid-area: PartialDependence2D;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 10px;
+  column-gap: 10px;
+  grid-template-areas: 
+  "svg1"
+  "svg2";
+  justify-items: stretch;
+  
+  #svg1 {
+    grid-area: svg1;
+    width: 100%;
+    height: 100%;
+  }
+
+  #svg2{
+    grid-area: svg2;
+    width: 100%;
+    height: 100%;
+  }
+
+  .xAxis, .yAxis {
+    font-size: 7px;
+  }
+
+  .label {
+    font-size: 12px;
+    fill: green;
+  }
+
+  .cell {
+    stroke: none;
+  }
+
+  .squares {
+    stroke:gray;
+  }
+}

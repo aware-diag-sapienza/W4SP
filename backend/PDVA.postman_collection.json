@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "1bcb90d3-4c31-4cbe-9f11-503a365ce1a7",
+		"name": "PDVA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Global Tuples",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}:{{port}}/patient/tuples",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"patient",
+						"tuples"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Global Features",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}:{{port}}/global/features",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"global",
+						"features"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Global PDP_2D",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}:{{port}}/global/pdp_2d?fx=1&fy=0",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"global",
+						"pdp_2d"
+					],
+					"query": [
+						{
+							"key": "fx",
+							"value": "1"
+						},
+						{
+							"key": "fy",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patient Tuples",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}:{{port}}/global/tuples",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"global",
+						"tuples"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patient Features",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}:{{port}}/patient/features",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"patient",
+						"features"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patient PDP_2D",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}:{{port}}/patient/pdp_2d?fx=1&fy=0",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"patient",
+						"pdp_2d"
+					],
+					"query": [
+						{
+							"key": "fx",
+							"value": "1"
+						},
+						{
+							"key": "fy",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "port",
+			"value": "11760"
+		},
+		{
+			"key": "baseurl",
+			"value": "http://localhost"
+		}
+	]
+}
