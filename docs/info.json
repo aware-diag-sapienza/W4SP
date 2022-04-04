@@ -1,0 +1,36 @@
+{
+  "title": "A Visual Analytics Workflow for Explorable and Steerable Partial Dependence Analysis",
+  "authors": "M. Angelini, G. Blasilli, S. Lenti, and G. Santucci",
+  "venue": "",
+  "doi": "",
+  "researchGate": "",
+  "teaser": "media/workflow.png",
+  "buttons": [
+    {
+      "text": "Try the<br><b>W4SP</b> prototype",
+      "link": "prototype",
+      "icon": "fas fa-window-restore fa-2x"
+    },
+    {
+      "text": "<b>W4SP</b> video<br>demonstration",
+      "link": "media/w4sp.mp4",
+      "icon": "fas fa-video fa-2x"
+    },
+    {
+      "text": "<b>Case study</b><br>video",
+      "link": "media/case_study.mp4",
+      "icon": "fas fa-video fa-2x"
+    },
+    {
+      "text": "<b>Usage scenario 1</b><br>video",
+      "link": "media/usage_scenario_1.mp4",
+      "icon": "fas fa-video fa-2x"
+    },
+    {
+      "text": "<b>W4SP</b><br>Source Code",
+      "link": "https://github.com/aware-diag-sapienza/W4SP",
+      "icon": "fab fa-github fa-2x"
+    }
+  ],
+  "abstract": "Machine learning techniques have become one of the driving components of research in many fields, from advertisement, self-driving cars to healthcare. Recently, a growing interest in increasing human involvement has emerged, with the primary goal of improving the interpretability of machine learning models. Among different techniques, Partial Dependence Plots (PDP) represents one of the main model-agnostic approaches for interpreting how the features influence the prediction of a machine learning model. However, its limitations (i.e., visual interpretation, aggregation of heterogeneous effects, inaccuracy, and computability) could complicate or misdirect the analysis. Furthermore, when analyzing the effect of more features at the same time, the combinatorial space to consider can be challenging to explore from both computational and cognitive costs. This paper proposes a novel Visual Analytics workflow to conduct Partial Dependence analysis to mitigate those state-of-the-art limitations. The proposed workflow allows for more guided Partial Dependence analysis helping in identifying incrementally accurate results at different levels for different features, providing exploration and steering visual means. With this approach, the user can save both computational and cognitive costs, in contrast with the monolithic state-of-the-art approach that computes all the possible combinations of features on all their domains in batch. The workflow is the result of a careful design process involving experts' knowledge during its validation and informed the development of a prototype, W4SP, that demonstrates its applicability. A case study shows the advantages of this workflow's usage for conducting a Partial Dependence analysis."
+}

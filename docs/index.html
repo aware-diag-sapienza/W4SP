@@ -17,7 +17,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/1daf48f628.js" crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="./js/createPage.js" ></script>
     <style>
         #github-fork {
             position: fixed;
@@ -63,7 +62,8 @@
         }
         
         #buttons-row .btn {
-            width: 200px;
+            width: 180px;
+            margin-bottom: 20px;
         }
         
         #abstract {
@@ -85,7 +85,7 @@
 
 <body class="d-flex flex-column h-100">
     <!-- https://github.blog/2008-12-19-github-ribbons/ -->
-    <a id="github-fork" ></a>
+    <!-- <a id="github-fork" ></a>-->
     <!-- Begin page content -->
     <main role="main" class="flex-shrink-0">
         <div class="container">
@@ -107,9 +107,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <p id="abstract-content">
-                                
-                            </p>
+                            <p id="abstract-content"></p>
                         </div>
                     </div>
                 </div>
@@ -126,7 +124,62 @@
         </div>
     </footer>
 </body>
-<script>createPage();</script>
+<script>
+    d3.json('info.json').then(info => {
+        console.log(info)
+        // title
+        if(info.hasOwnProperty('title')) {
+            d3.select('#title').html(info.title)
+            d3.select('head').select('title').text(info.title)
+        }
+        // authors
+        if(info.hasOwnProperty('authors')) {
+            d3.select('#authors').html(info.authors)
+        }
+        // venue
+        if(info.hasOwnProperty('venue')) {
+            d3.select('#venue').html(info.venue)
+        }
+        // doi
+        if(info.hasOwnProperty('doi')) {
+            d3.select('#doi').html(info.doi)
+        }
+        // researchGrate
+        if(info.hasOwnProperty('researchGrate')) {
+            d3.select('#researchGate').html(info.researchGate)
+        }
+        // teaser
+        if(info.hasOwnProperty('teaser')) {
+            d3.select('#teaser').attr('src', info.teaser)
+        }
+        // abstract
+        if(info.hasOwnProperty('abstract')) {
+            d3.select('#label-abstract').html('<b>Abstract</b>')
+            d3.select('#abstract-content').html(info.abstract)
+        }
+        // buttons
+        if(info.hasOwnProperty('buttons')) {
+            d3.select('#buttons-row').selectAll('.col')
+                .data(info.buttons)
+                .enter()
+                .append('div').attr('class', 'col')
+                .append('a')
+                .attr('role','button')
+                .attr('class','btn btn-outline-secondary')
+                .attr('href', d => d.link)
+                .attr('target','_blank')
+                .each((d, i, nodes) => {
+                    const el = d3.select(nodes[i])
+                    if(d.hasOwnProperty('icon')){
+                        el.append('i').attr('class', d.icon)
+                        el.append('br')
+                    }
+                    if(d.hasOwnProperty('text')){
+                        el.append('span').attr('class', 'buttonText').html(d.text)
+                    }
+                })
+        }
+       
+    })
+</script>
 </html>
-
-<!-- https://www.dropbox.com/s/qz4iyrecxzpwqx6/wasp.mov? -->
