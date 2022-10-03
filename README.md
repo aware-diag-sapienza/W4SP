@@ -1,8 +1,6 @@
 # The W4SP Prototype
-Versatile Visual analysis for Steerable Partial dependence
-
+_Versatile Visual analysis for Steerable Partial dependence._
 Try a demo [here](https://aware-diag-sapienza.github.io/W4SP/prototype/), or run locally by using the following instructions.
-
 Video demonstrations are avaliable [here](https://aware-diag-sapienza.github.io/W4SP/).
 
 
