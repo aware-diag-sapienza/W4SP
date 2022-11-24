@@ -200,6 +200,33 @@ class _Classifier:
         clusters.sort(key=lambda x: len(x['tuples']), reverse=True)
         return clusters
 
+    ## used for evaluation, returns 1D numpy array
+    def computePartialDependenceArray_1D(self, className, feature, targetValues):
+        pdp = np.full(len(targetValues), np.nan, float)
+        X = self.data.copy()
+        for i, v in enumerate(targetValues):
+            X[:,feature] = v
+            pdp[i] = self.predictClassProbability(X, className)
+        return np.around(pdp, 3)
+
+    def computePartialDependenceArray_2D(self, className, f1, f2, targetValues1, targetValues2):
+        pdp = np.full((len(targetValues1), len(targetValues2)), np.nan, dtype=float)
+        X = self.data.copy()
+        for i, v1 in enumerate(targetValues1):
+            for j, v2 in enumerate(targetValues2):
+                X[:, [f1, f2]] = [v1, v2]
+                pdp[i,j] = round(self.predictClassProbability(X, className), 3)
+        return pdp
+
+    def computePartialDependenceArray_3D(self, className, f1, f2, f3, targetValues1, targetValues2, targetValues3):
+        pdp = np.full((len(targetValues1), len(targetValues2), len(targetValues3)), np.nan, dtype=float)
+        X = self.data.copy()
+        for i, v1 in enumerate(targetValues1):
+            for j, v2 in enumerate(targetValues2):
+                for z, v3 in enumerate(targetValues3):
+                    X[:, [f1, f2, f3]] = [v1, v2, v3]
+                    pdp[i,j,z] = round(self.predictClassProbability(X, className), 3)
+        return pdp
 #
 #
 #
