@@ -227,6 +227,17 @@ class _Classifier:
                     X[:, [f1, f2, f3]] = [v1, v2, v3]
                     pdp[i,j,z] = round(self.predictClassProbability(X, className), 3)
         return pdp
+    
+    def computePartialDependenceArray_4D(self, className, f1, f2, f3, f4, targetValues1, targetValues2, targetValues3, targetValues4):
+        pdp = np.full((len(targetValues1), len(targetValues2), len(targetValues3), len(targetValues4)), np.nan, dtype=float)
+        X = self.data.copy()
+        for i, v1 in enumerate(targetValues1):
+            for j, v2 in enumerate(targetValues2):
+                for k, v3 in enumerate(targetValues3):
+                    for z, v4 in enumerate(targetValues3):
+                        X[:, [f1, f2, f3, f4]] = [v1, v2, v3, v4]
+                        pdp[i,j,k,z] = round(self.predictClassProbability(X, className), 3)
+        return pdp
 #
 #
 #
