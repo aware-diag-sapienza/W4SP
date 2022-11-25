@@ -135,7 +135,7 @@ def project_3Dto1D(pdp, f): #feature: 0 or 1 or 2
         m_arr[i] = np.mean(p.flatten())
         v_arr[i] = np.var(p.flatten())
     
-    return m_arr, v_arr, projectionErrors_all(m_arr, v_arr)
+    return projectionErrors_all(m_arr, v_arr)
 
 def project_3Dto2D(pdp, f1, f2):
     m_arr = np.full((pdp.shape[f1],pdp.shape[f2]), 0.0)
@@ -295,14 +295,16 @@ def createCharts(df, folder):
         plt.clf()
 
 def extractStatistics(df, folder):
+    log = TimeLog()
     df_arr = []
     for e in ['AbsoluteError', 'RelativeError', 'ClassificationError']:
         df_arr.append(df[['Projection Type', e]].groupby(by=['Projection Type']).mean().rename(columns={e: f'{e} (mean)'}))
         df_arr.append(df[['Projection Type', e]].groupby(by=['Projection Type']).var().rename(columns={e: f'{e} (var)'}))
-        df_arr.append(df[['Projection Type', e]].groupby(by=['Projection Type']).std().rename(columns={e: f'{e} (std)'}))
-        df_arr.append(df[['Projection Type', e]].groupby(by=['Projection Type']).median().rename(columns={e: f'{e} (median)'}))
+        #df_arr.append(df[['Projection Type', e]].groupby(by=['Projection Type']).std().rename(columns={e: f'{e} (std)'}))
+        #df_arr.append(df[['Projection Type', e]].groupby(by=['Projection Type']).median().rename(columns={e: f'{e} (median)'}))
 
     pd.concat(df_arr, axis=1).to_excel(folder.joinpath('stats.xlsx'))
+    log.print(f'Stats saved')
 
 
 
@@ -310,8 +312,8 @@ def computePartialDependence(dataset, classifier):
     result = {}
     result.update(computePartialDependence_1D(dataset, classifier))
     result.update(computePartialDependence_2D(dataset, classifier))
-    #result.update(computePartialDependence_3D(dataset, classifier))
-    #result.update(computePartialDependence_4D(dataset, classifier))
+    result.update(computePartialDependence_3D(dataset, classifier))
+    result.update(computePartialDependence_4D(dataset, classifier))
     return result
 
 
