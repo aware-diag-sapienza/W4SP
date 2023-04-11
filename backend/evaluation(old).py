@@ -99,7 +99,7 @@ def computePartialDependence_4D(dataset, classifier):
     return result
 
 
-'''def projectionAbsoluteError(m_arr, v_arr):
+def projectionAbsoluteError(m_arr, v_arr):
     std_arr = np.sqrt(v_arr)
     error = np.mean(std_arr.flatten())
     return error
@@ -125,13 +125,12 @@ def projectionErrors_all(m_arr, v_arr, ci_arr):
         'ClassificationError': projectionClassificationError(m_arr, v_arr),
         'CiError': projectionCiError(ci_arr)
     }
-'''
+
 
 def project_2Dto1D(pdp, f): #feature: 0 or 1
     m_arr = np.full(pdp.shape[f], 0.0)
     v_arr = np.full(pdp.shape[f], 0.0)
     ci_arr = np.full(pdp.shape[f], 0.0)
-    std_arr = np.full(pdp.shape[f], 0.0)
 
     for i in range(pdp.shape[f]):
         idx = [':', ':']
@@ -140,16 +139,14 @@ def project_2Dto1D(pdp, f): #feature: 0 or 1
         p = eval(f'pdp[{idx}]')
         m_arr[i] = np.mean(p.flatten())
         v_arr[i] = np.var(p.flatten())
-        std_arr[i] = np.std(p.flatten())
         ci_arr[i] = confidenceInterval(p.flatten())
     
-    return m_arr, std_arr
+    return m_arr, projectionErrors_all(m_arr, v_arr, ci_arr)
 
 def project_3Dto1D(pdp, f): #feature: 0 or 1 or 2
     m_arr = np.full(pdp.shape[f], 0.0)
     v_arr = np.full(pdp.shape[f], 0.0)
     ci_arr = np.full(pdp.shape[f], 0.0)
-    std_arr = np.full(pdp.shape[f], 0.0)
 
     for i in range(pdp.shape[f]):
         idx = [':', ':', ':']
@@ -159,15 +156,13 @@ def project_3Dto1D(pdp, f): #feature: 0 or 1 or 2
         m_arr[i] = np.mean(p.flatten())
         v_arr[i] = np.var(p.flatten())
         ci_arr[i] = confidenceInterval(p.flatten())
-        std_arr[i] = np.std(p.flatten())
     
-    return m_arr, std_arr
+    return m_arr, projectionErrors_all(m_arr, v_arr, ci_arr)
 
 def project_3Dto2D(pdp, f1, f2):
     m_arr = np.full((pdp.shape[f1],pdp.shape[f2]), 0.0)
     v_arr = np.full((pdp.shape[f1],pdp.shape[f2]), 0.0)
     ci_arr = np.full((pdp.shape[f1],pdp.shape[f2]), 0.0)
-    std_arr = np.full((pdp.shape[f1],pdp.shape[f2]), 0.0)
     
     if f1 == f2: raise Exception('Error f1 and f2 are equals')
 
@@ -181,16 +176,14 @@ def project_3Dto2D(pdp, f1, f2):
             m_arr[i,j] = np.mean(p.flatten())
             v_arr[i,j] = np.var(p.flatten())
             ci_arr[i] = confidenceInterval(p.flatten())
-            std_arr[i,j] = np.std(p.flatten())
     
-    return m_arr, std_arr
+    return m_arr, projectionErrors_all(m_arr, v_arr, ci_arr)
 
 
 def project_4Dto3D(pdp, f1, f2, f3):
     m_arr = np.full((pdp.shape[f1],pdp.shape[f2],pdp.shape[f3]), 0.0)
     v_arr = np.full((pdp.shape[f1],pdp.shape[f2],pdp.shape[f3]), 0.0)
     ci_arr = np.full((pdp.shape[f1],pdp.shape[f2],pdp.shape[f3]), 0.0)
-    std_arr = np.full((pdp.shape[f1],pdp.shape[f2],pdp.shape[f3]), 0.0)
 
     if len(np.unique([f1, f2, f3])) < 3:
         raise Exception('Att least two features are equals')
@@ -207,16 +200,14 @@ def project_4Dto3D(pdp, f1, f2, f3):
                 m_arr[i,j,k] = np.mean(p.flatten())
                 v_arr[i,j,k] = np.var(p.flatten())
                 ci_arr[i] = confidenceInterval(p.flatten())
-                std_arr[i,j,k] = np.var(p.flatten())
 
-    return m_arr, std_arr
+    return m_arr, projectionErrors_all(m_arr, v_arr, ci_arr)
 
 
 def project_4Dto2D(pdp, f1, f2):
     m_arr = np.full((pdp.shape[f1],pdp.shape[f2]), 0.0)
     v_arr = np.full((pdp.shape[f1],pdp.shape[f2]), 0.0)
     ci_arr = np.full((pdp.shape[f1],pdp.shape[f2]), 0.0)
-    std_arr = np.full((pdp.shape[f1],pdp.shape[f2]), 0.0)
 
     if f1 == f2: raise Exception('Error f1 and f2 are equals')
 
@@ -230,16 +221,14 @@ def project_4Dto2D(pdp, f1, f2):
             m_arr[i,j] = np.mean(p.flatten())
             v_arr[i,j] = np.var(p.flatten())
             ci_arr[i] = confidenceInterval(p.flatten())
-            std_arr[i,j] = np.var(p.flatten())
 
-    return m_arr, std_arr
+    return m_arr, projectionErrors_all(m_arr, v_arr, ci_arr)
 
 
 def project_4Dto1D(pdp, f1):
     m_arr = np.full(pdp.shape[f1], 0.0)
     v_arr = np.full(pdp.shape[f1], 0.0)
     ci_arr = np.full(pdp.shape[f1], 0.0)
-    std_arr = np.full(pdp.shape[f1], 0.0)
 
     for i in range(pdp.shape[f1]):
         idx = [':', ':', ':', ':']
@@ -249,25 +238,26 @@ def project_4Dto1D(pdp, f1):
         m_arr[i] = np.mean(p.flatten())
         v_arr[i] = np.var(p.flatten())
         ci_arr[i] = confidenceInterval(p.flatten())
-        std_arr[i] = np.var(p.flatten())
 
-    return m_arr, std_arr
+    return m_arr, projectionErrors_all(m_arr, v_arr, ci_arr)
                 
     
 
 
 def projectPartialDependence(pdp):
     result = []
-    def pushResult(pdp_key, proj_key, std, type_proj, mean):
+    def pushResult(pdp_key, proj_key, errors, type_proj, mean):
         
         result.append({
-            'Projection Type': type_proj,
             'PDP': pdp_key,
             'Projection': proj_key,
             'PDP Order': len(pdp_key.split('-')),
             'Projection Order': len(proj_key.split('-')),
-            'Projection Mean': mean,
-            'Projection Std': std
+            'ProjMean': mean,
+            'AbsoluteError': errors['AbsoluteError'],
+            'RelativeError': errors['RelativeError'],
+            'CiError': errors['CiError'],
+            'Projection Type': type_proj
         })
     
     
@@ -281,96 +271,122 @@ def projectPartialDependence(pdp):
         if ord_PDP == 2: 
             # 2D to 1D
             for f in [0,1]:
-                means, stds = project_2Dto1D(P, f)
+                means, errors = project_2Dto1D(P, f)
                 proj_key = f'{flist[f]}'
                 type_proj = '2D -> 1D'
-                pushResult(pdp_key, proj_key, np.mean(stds), type_proj, np.mean(means))
+                pushResult(pdp_key, proj_key, errors, type_proj, np.mean(means))
         
         if ord_PDP == 3:
             # 3D to 1D
             for f in [0,1,2]:
-                means, stds = project_3Dto1D(P, f)
+                means, errors = project_3Dto1D(P, f)
                 proj_key = f'{flist[f]}'
                 type_proj = '3D -> 1D'
-                pushResult(pdp_key, proj_key, np.mean(stds), type_proj, np.mean(means))
+                pushResult(pdp_key, proj_key, errors, type_proj, np.mean(means))
             # 3D to 2D
             for f1,f2 in itertools.combinations([0,1,2], 2):
-                means, stds = project_3Dto2D(P, f1, f2)
+                means, errors = project_3Dto2D(P, f1, f2)
                 proj_key = f'{flist[f1]}-{flist[f2]}'
                 type_proj = '3D -> 2D'
-                pushResult(pdp_key, proj_key, np.mean(stds), type_proj, np.mean(means))
+                pushResult(pdp_key, proj_key, errors, type_proj, np.mean(means))
         
         if ord_PDP == 4:
             # 4D to 1D
             for f in [0,1,2,3]:
-                means, stds = project_4Dto1D(P, f)
+                means, errors = project_4Dto1D(P, f)
                 proj_key = f'{flist[f]}'
                 type_proj = '4D -> 1D'
-                pushResult(pdp_key, proj_key, np.mean(stds), type_proj, np.mean(means))
+                pushResult(pdp_key, proj_key, errors, type_proj, np.mean(means))
             # 4D to 2D
             for f1,f2 in itertools.combinations([0,1,2,3], 2):
-                means, stds = project_4Dto2D(P, f1, f2)
+                means, errors = project_4Dto2D(P, f1, f2)
                 proj_key = f'{flist[f1]}-{flist[f2]}'
                 type_proj = '4D -> 2D'
-                pushResult(pdp_key, proj_key, np.mean(stds), type_proj, np.mean(means))
+                pushResult(pdp_key, proj_key, errors, type_proj, np.mean(means))
             # 4D to 3D
             for f1,f2,f3 in itertools.combinations([0,1,2,3], 3):
-                means, stds = project_4Dto3D(P, f1, f2, f3)
+                means, errors = project_4Dto3D(P, f1, f2, f3)
                 proj_key = f'{flist[f1]}-{flist[f2]}'
                 type_proj = '4D -> 3D'
-                pushResult(pdp_key, proj_key, np.mean(stds), type_proj, np.mean(means))
+                pushResult(pdp_key, proj_key, errors, type_proj, np.mean(means))
 
     return pd.DataFrame(result)
 
 
-def createCharts(df, folder):
-    log = TimeLog()
+def createCharts(df, datasetFile, folder):
     import matplotlib.pyplot as plt
     import seaborn as sns
     sns.set_theme(style="whitegrid")
-     
-    # projection means
-    fig, ax = plt.subplots(figsize=(11, 6))
-    sns.boxplot(ax=ax, data=df, x='Projection Type', y='Projection Mean', palette='pastel', linewidth=0.75, saturation=0.5)
-    #sns.swarmplot(ax=ax, data=df, x='Projection Type', y='Projection Mean', color='.25')
-    #ax.set(ylim=(0, 0.5))
-    plt.savefig(folder.joinpath(f'boxplot - ProjectionMean.pdf'))
-    plt.clf()
+    
+    dataset = loadDataset(datasetFile)
 
-    # projection std
-    fig, ax = plt.subplots(figsize=(11, 6))
-    sns.boxplot(ax=ax, data=df, x='Projection Type', y='Projection Std', palette='pastel', linewidth=0.75, saturation=0.5)
-    #sns.swarmplot(ax=ax, data=df, x='Projection Type', y='Projection Std', color='.25')
-    #ax.set(ylim=(0, 0.5))
-    plt.savefig(folder.joinpath(f'boxplot - ProjectionStd.pdf'))
-    plt.clf()
+    for e in ['AbsoluteError', 'RelativeError', 'CiError']:
+        
+        #global
+        fig, ax = plt.subplots(figsize=(11, 6))
+        sns.boxplot(ax=ax, data=df, x='Projection Type', y=e, palette='pastel', linewidth=0.75, saturation=0.5)
+        sns.swarmplot(ax=ax, data=df, x='Projection Type', y=e, color='.25')
+        #ax.set(ylim=(0, 0.5))
+        plt.savefig(folder.joinpath(f'boxplot-{e}.pdf'))
+        plt.clf()
 
-    log.print(f'Chart created')
+        '''# 2D -> 1D boxplots per features (1D)
+        currentFolder = folder.joinpath(e)
+        currentFolder.mkdir(exist_ok = True)
+        df_filtered = df[ (df['PDP Order']==2) & (df['Projection Order']==1)]
+        df_filtered['PDP'] = df_filtered['PDP'].map(lambda d: dataset.getFeatures()[int(d.split('-')[0])].name + '-' + dataset.getFeatures()[int(d.split('-')[1])].name)
+        df_filtered['Projection'] = df_filtered['Projection'].map(lambda i: dataset.getFeatures()[int(i)].name)
+        fig, ax = plt.subplots(figsize=(11, 6))
+        sns.boxplot(ax=ax, data=df_filtered, x='Projection', y=e, palette='pastel', linewidth=0.75, saturation=0.5)
+        sns.swarmplot(ax=ax, data=df_filtered, x='Projection', y=e, color='.25')
+        if e == 'RelativeError':
+            ax.set(ylim=(0, 1.2))
+        else:
+            ax.set(ylim=(0, 0.5))
+        plt.savefig(currentFolder.joinpath(f'boxplot-features-{e}-2D_1D.pdf'))
+        plt.clf()
+
+        # 3D -> 1D boxplots per features (1D)
+        currentFolder = folder.joinpath(e)
+        currentFolder.mkdir(exist_ok = True)
+        df_filtered = df[ (df['PDP Order']==3) & (df['Projection Order']==1)]
+        df_filtered['PDP'] = df_filtered['PDP'].map(lambda d: dataset.getFeatures()[int(d.split('-')[0])].name + '-' + dataset.getFeatures()[int(d.split('-')[1])].name)
+        df_filtered['Projection'] = df_filtered['Projection'].map(lambda i: dataset.getFeatures()[int(i)].name)
+        fig, ax = plt.subplots(figsize=(11, 6))
+        sns.boxplot(ax=ax, data=df_filtered, x='Projection', y=e, palette='pastel', linewidth=0.75, saturation=0.5)
+        if e == 'RelativeError':
+            ax.set(ylim=(0, 1.2))
+        else:
+            ax.set(ylim=(0, 0.5))
+        plt.savefig(currentFolder.joinpath(f'boxplot-features-{e}-3D_1D.pdf'))
+        plt.clf()'''
         
 
     
 
 def extractStatistics(df, folder):
     log = TimeLog()
+    writer = pd.ExcelWriter(folder.joinpath(f'stats.xlsx'), engine='xlsxwriter')
     
-    tmp = []
-    for pt in df['Projection Type'].unique():
-        projmean = df[df['Projection Type']==pt]['Projection Mean'].to_numpy()
-        projstd = df[df['Projection Type']==pt]['Projection Std'].to_numpy()
+    for e in ['AbsoluteError', 'RelativeError']:
+        tmp = []
+        
+        for pt in df['Projection Type'].unique():
+            errors = df[df['Projection Type']==pt][e].to_numpy()
+            projmean = df[df['Projection Type']==pt]['Mean'].to_numpy()
 
-        tmp.append({
-            'Projection Type': pt,
-
-            'Projection Mean (MEAN)': projmean.mean(),
-            'Projection Mean (STD)': projmean.std(),
-            'Projection Mean (CI)': confidenceInterval(projmean),
-
-            'Projection Std (MEAN)': projstd.mean(),
-            'Projection Std (STD)': projstd.std(),
-            'Projection Std (CI)': confidenceInterval(projstd)
-        })
+            tmp.append({
+                'Projection Type': pt,
+                'Projection Mean': projmean.mean(),
+                'Error Type': e,
+                'Error Mean': errors.mean(),
+                'Error Std': errors.std(),
+                'Error CI': confidenceInterval(errors)
+            })
             
-    pd.DataFrame(tmp).round(4).to_excel(folder.joinpath(f'stats.xlsx'), index=False)
+        pd.DataFrame(tmp).round(4).to_excel(writer, sheet_name=e, index=False)
+
+    writer.save()
     log.print(f'Stats saved')
 
 
@@ -399,8 +415,9 @@ def main(datasetFile, classifierFn):
     log = TimeLog()
     df = pd.read_excel(xlsFile)
     log.print(f'Loaded {xlsFile.resolve()}')
-    
-    createCharts(df, folder)
+    createCharts(df, datasetFile, folder)
+    log.print(f'Chart created')
+
     extractStatistics(df, folder)
 
 
