@@ -142,7 +142,7 @@
         }
         // doi
         if(info.hasOwnProperty('doi')) {
-            d3.select('#doi').html(info.doi)
+            d3.select('#doi').html(`<a href="${info.doi}" target="_blank">${info.doi}</a>`)
         }
         // researchGrate
         if(info.hasOwnProperty('researchGrate')) {
