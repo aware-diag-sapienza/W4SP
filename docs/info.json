@@ -1,8 +1,8 @@
 {
   "title": "A Visual Analytics Workflow for Explorable and Steerable Partial Dependence Analysis",
   "authors": "M. Angelini, G. Blasilli, S. Lenti, and G. Santucci",
-  "venue": "",
-  "doi": "",
+  "venue": "IEEE Transactions on Visualization and Computer Graphics",
+  "doi": "https://doi.org/10.1109/TVCG.2023.3263739",
   "researchGate": "",
   "teaser": "media/workflow.png",
   "buttons": [
